@@ -3,6 +3,8 @@ import { CopyAddress } from "@/components/copy-address";
 
 const requestUrl =
   "https://github.com/BabaVictim/website-repair-sprint/issues/new?template=repair-request.yml";
+const preflightRequestUrl =
+  "https://github.com/BabaVictim/website-repair-sprint/issues/new?template=preflight-request.yml";
 
 const serviceStructuredData = {
   "@context": "https://schema.org",
@@ -12,13 +14,24 @@ const serviceStructuredData = {
   description:
     "A fixed-scope engineering sprint for existing websites with a tested patch, before-and-after report, and one focused revision.",
   url: "https://babavictim.github.io/website-repair-sprint/",
-  offers: {
-    "@type": "Offer",
-    price: "300",
-    priceCurrency: "USD",
-    availability: "https://schema.org/LimitedAvailability",
-    url: requestUrl,
-  },
+  offers: [
+    {
+      "@type": "Offer",
+      name: "Public Website Preflight Report",
+      price: "49",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: preflightRequestUrl,
+    },
+    {
+      "@type": "Offer",
+      name: "48-hour Website Repair Sprint",
+      price: "300",
+      priceCurrency: "USD",
+      availability: "https://schema.org/LimitedAvailability",
+      url: requestUrl,
+    },
+  ],
 };
 
 const included = [
@@ -45,13 +58,13 @@ const steps = [
   },
   {
     number: "02",
-    title: "Agree the boundary",
-    text: "You receive a written scope, exclusions, delivery time, and BTC invoice amount before work starts.",
+    title: "Choose report or repair",
+    text: "You receive a written scope, exclusions, delivery time, and BTC invoice amount for the $49 preflight or $300 repair sprint.",
   },
   {
     number: "03",
-    title: "Repair and verify",
-    text: "The site is fixed in an isolated branch and checked across viewport, interaction, accessibility, and build paths.",
+    title: "Inspect or repair",
+    text: "The preflight checks public pages without credentials or changes. The sprint repairs agreed defects in an isolated branch.",
   },
   {
     number: "04",
@@ -84,27 +97,26 @@ export default function Home() {
           <a href="#process">Process</a>
           <a href="#price">Price</a>
           <Link href="/invoice/">Invoice tool</Link>
-          <a className="nav-cta" href={requestUrl}>
-            Request a sprint
+          <a className="nav-cta" href={preflightRequestUrl}>
+            Request a preflight
           </a>
         </nav>
       </header>
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <p className="availability">Two introductory slots available</p>
-          <h1>Fix the broken parts of your website in 48 hours.</h1>
+          <h1>Find the broken parts first. Fix them in 48 hours.</h1>
           <p className="lede">
-            One focused engineering sprint for an existing site. Mobile layout,
-            forms, accessibility, metadata, and practical performance fixes—then
-            a tested patch and a plain-English report.
+            Start with a read-only $49 preflight of one public site, or book the
+            $300 repair sprint for a tested patch and plain-English delivery
+            report.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href={requestUrl}>
-              Request a sprint
+            <a className="button button-primary" href={preflightRequestUrl}>
+              Request a $49 preflight
             </a>
-            <a className="button button-secondary" href="#scope">
-              See the exact scope
+            <a className="button button-secondary" href={requestUrl}>
+              Request the repair sprint
             </a>
           </div>
           <p className="quiet">
@@ -113,33 +125,33 @@ export default function Home() {
           </p>
         </div>
 
-        <aside className="delivery-card" aria-label="Sprint delivery summary">
-          <h2>What you receive</h2>
+        <aside className="delivery-card" aria-label="Service options">
+          <h2>Two fixed-scope options</h2>
           <dl>
             <div>
-              <dt>Turnaround</dt>
-              <dd>2 working days</dd>
+              <dt>Public preflight</dt>
+              <dd>$49 in BTC</dd>
             </div>
             <div>
-              <dt>Price</dt>
+              <dt>Preflight delivery</dt>
+              <dd>1 working day</dd>
+            </div>
+            <div>
+              <dt>Preflight output</dt>
+              <dd>Prioritized report</dd>
+            </div>
+            <div>
+              <dt>Repair sprint</dt>
               <dd>$300 in BTC</dd>
             </div>
             <div>
-              <dt>Delivery</dt>
-              <dd>Patch or pull request</dd>
-            </div>
-            <div>
-              <dt>Evidence</dt>
-              <dd>Checks + before/after report</dd>
-            </div>
-            <div>
-              <dt>Revision</dt>
-              <dd>One focused pass</dd>
+              <dt>Sprint output</dt>
+              <dd>Patch + evidence</dd>
             </div>
           </dl>
           <p>
-            The BTC amount is fixed from an agreed spot rate when the invoice is
-            issued.
+            Both amounts are fixed from an agreed spot rate when the invoice is
+            issued. No payment is requested before the scope is confirmed.
           </p>
         </aside>
       </section>
@@ -204,29 +216,38 @@ export default function Home() {
 
       <section className="content-section price-section" id="price">
         <div className="price-copy">
-          <h2>Introductory sprint: $300 USD equivalent in Bitcoin.</h2>
+          <h2>Start with a $49 public-site preflight.</h2>
           <p>
-            Fifty percent starts the booked sprint; fifty percent is due at
-            acceptance. The sender covers the network fee so the invoiced amount
-            arrives. Larger work is quoted separately and never started by
-            assumption.
+            Within one working day, receive a prioritized report covering up to
+            three agreed public pages: mobile layout, visible interaction paths,
+            accessibility heuristics, metadata, security headers, and practical
+            performance findings. No login, form submission, security probing,
+            or code changes.
           </p>
-          <a className="button button-primary" href={requestUrl}>
-            Open a public request
-          </a>
+          <div className="hero-actions">
+            <a className="button button-primary" href={preflightRequestUrl}>
+              Request the $49 preflight
+            </a>
+            <a className="button button-secondary" href={requestUrl}>
+              Request the $300 sprint
+            </a>
+          </div>
           <p className="request-note">
-            GitHub requests are public. Include a public URL and symptoms only;
-            never paste passwords, tokens, customer data, or private repository
-            details.
+            A GitHub account is required to submit. Requests are public: include
+            only a public URL and visible symptoms. Never paste passwords,
+            tokens, customer data, or private repository details.{" "}
+            <a href="https://github.com/BabaVictim/website-repair-sprint/blob/main/docs/preflight-report-scope-and-terms.md">
+              Read the exact preflight boundaries.
+            </a>
           </p>
         </div>
         <div className="fit-check">
-          <h3>Before booking</h3>
+          <h3>Choose the repair sprint when</h3>
           <ul>
-            <li>The site already exists.</li>
-            <li>The desired outcome can be verified.</li>
+            <li>You already know which defects should be fixed.</li>
+            <li>The desired outcome can be tested.</li>
             <li>The work fits one isolated branch.</li>
-            <li>You can authorize the code and deployment.</li>
+            <li>You can authorize access, code, and deployment.</li>
           </ul>
         </div>
       </section>
@@ -259,7 +280,8 @@ export default function Home() {
         <p>Website Repair Sprint</p>
         <div>
           <a href="#scope">Scope</a>
-          <a href={requestUrl}>Request</a>
+          <a href={preflightRequestUrl}>Preflight</a>
+          <a href={requestUrl}>Repair sprint</a>
           <Link href="/invoice/">Invoice tool</Link>
           <Link href="/third-party-notices.txt">Licenses</Link>
           <a href="https://github.com/BabaVictim/website-repair-sprint">

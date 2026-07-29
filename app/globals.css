@@ -145,13 +145,6 @@ nav .nav-cta:hover {
   max-width: 720px;
 }
 
-.availability {
-  color: var(--green);
-  font-size: 14px;
-  font-weight: 700;
-  margin: 0 0 18px;
-}
-
 h1,
 h2,
 h3,

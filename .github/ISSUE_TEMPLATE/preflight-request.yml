@@ -1,0 +1,70 @@
+name: Request a public-site preflight report
+description: Request a read-only report for one website, delivered within one working day.
+title: "[Preflight request] "
+labels:
+  - preflight-request
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This request is public. Share only a public website URL and visible symptoms. Do not include credentials, private repository details, customer data, or vulnerability information.
+
+        The fixed introductory price is $49 USD equivalent in Bitcoin. The exact pages, delivery channel, BTC amount, exchange-rate source, and invoice expiry are confirmed in writing before payment. Review the [draft preflight scope and terms](https://github.com/BabaVictim/website-repair-sprint/blob/main/docs/preflight-report-scope-and-terms.md).
+  - type: input
+    id: public-url
+    attributes:
+      label: Public website URL
+      description: The preflight requires a publicly reachable HTTP(S) site that you own or are authorized to review.
+      placeholder: https://example.com/
+    validations:
+      required: true
+  - type: textarea
+    id: pages
+    attributes:
+      label: Pages to include
+      description: List the homepage and up to two additional public URLs.
+      placeholder: |
+        https://example.com/
+        https://example.com/contact/
+    validations:
+      required: true
+  - type: checkboxes
+    id: priorities
+    attributes:
+      label: What should the report prioritize?
+      options:
+        - label: Mobile layout and visible UI
+        - label: Navigation, forms, and calls to action
+        - label: Accessibility and keyboard use
+        - label: Metadata and search/social previews
+        - label: Performance and security headers
+  - type: textarea
+    id: symptoms
+    attributes:
+      label: Visible symptoms or questions
+      description: Describe what visitors can see. For private details, write “private handoff requested” instead of posting them.
+      placeholder: The contact page shifts horizontally on mobile, and the submit button is hard to reach by keyboard.
+  - type: dropdown
+    id: delivery
+    attributes:
+      label: Safe delivery preference
+      description: A private repository must be created and controlled by you; never post an invitation token.
+      options:
+        - Temporary private GitHub repository
+        - Public report in this issue
+        - Agree another channel before payment
+    validations:
+      required: true
+  - type: checkboxes
+    id: authorization
+    attributes:
+      label: Authorization and boundaries
+      options:
+        - label: I own this site or am authorized by its owner to request this review.
+          required: true
+        - label: I understand this is a read-only public-page review, not vulnerability testing or a promise of code changes.
+          required: true
+        - label: I understand the scope and BTC invoice are confirmed before payment.
+          required: true
+        - label: I have not included credentials, customer data, or private information.
+          required: true

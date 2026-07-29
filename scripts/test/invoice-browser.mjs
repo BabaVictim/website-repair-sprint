@@ -7,11 +7,14 @@ import puppeteer from "puppeteer-core";
 const targetUrl =
   process.env.INVOICE_TEST_URL ??
   "http://localhost:3000/invoice/";
+const siteUrl = new URL("../", targetUrl).href;
 const projectUrl = new URL("project/", targetUrl).href;
 const chromiumPath = process.env.CHROMIUM_PATH ?? "/snap/bin/chromium";
 const screenshotsDirectory = new URL("../../.screenshots/", import.meta.url);
 const customAddress = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
 const projectAddress = "bc1qptn9jxrw5ltaus7gpze6kn96d0nlqfmj3u8c2q";
+const preflightRequestUrl =
+  "https://github.com/BabaVictim/website-repair-sprint/issues/new?template=preflight-request.yml";
 
 function decodeQrDataUrl(dataUrl) {
   const encoded = dataUrl.split(",", 2)[1];
@@ -274,6 +277,43 @@ try {
     path: new URL("invoice-result-mobile.png", screenshotsDirectory).pathname,
   });
 
+  await page.goto(siteUrl, { waitUntil: "networkidle0" });
+  assert.match(
+    await page.$eval("h1", (element) => element.textContent ?? ""),
+    /Find the broken parts first/,
+  );
+  assert.ok(
+    (await page.$$eval(
+      `a[href="${preflightRequestUrl}"]`,
+      (elements) => elements.length,
+    )) >= 3,
+    "the paid preflight request should be reachable from multiple primary locations",
+  );
+  assert.equal(
+    await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+    true,
+    "the service page should not overflow a narrow viewport",
+  );
+  const serviceOffers = await page.$$eval(
+    'script[type="application/ld+json"]',
+    (scripts) =>
+      scripts
+        .map((script) => JSON.parse(script.textContent ?? "{}"))
+        .find((entry) => entry["@type"] === "Service")?.offers,
+  );
+  assert.deepEqual(
+    serviceOffers.map((offer) => [offer.name, offer.price]),
+    [
+      ["Public Website Preflight Report", "49"],
+      ["48-hour Website Repair Sprint", "300"],
+    ],
+    "structured data should publish both exact paid offers",
+  );
+  await page.screenshot({
+    fullPage: true,
+    path: new URL("service-home-mobile.png", screenshotsDirectory).pathname,
+  });
+
   const origin = new URL(targetUrl).origin;
   assert.deepEqual(
     requestedUrls.filter(
@@ -302,7 +342,7 @@ try {
   );
 
   console.log(
-    "Invoice browser checks passed: exact URI/QR parity, quiet zone, validation/focus, amount-unit safety, printable output, stale-result clearing, project support route, mobile layout, and no draft-data or third-party requests.",
+    "Browser checks passed: exact URI/QR parity, validation/focus, project support, both paid offers, mobile layout, and no draft-data or third-party requests.",
   );
 } finally {
   await browser.close();

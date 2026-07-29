@@ -31,7 +31,7 @@ body:
     id: symptoms
     attributes:
       label: What is broken or underperforming?
-      description: Describe visible symptoms and where they occur. Do not include sensitive data.
+      description: Describe visible symptoms and where they occur. For private details, write “private handoff requested” instead of posting them.
       placeholder: On mobile, the checkout button sits below the viewport...
     validations:
       required: true
@@ -48,6 +48,17 @@ body:
     attributes:
       label: Deadline or preferred start
       placeholder: No hard deadline / YYYY-MM-DD
+  - type: dropdown
+    id: handoff
+    attributes:
+      label: Safe private handoff preference
+      description: A private repository must be created and controlled by you; never post an invitation token.
+      options:
+        - Temporary private GitHub repository
+        - Agree another channel before payment
+        - No private handoff needed yet
+    validations:
+      required: true
   - type: checkboxes
     id: authorization
     attributes:

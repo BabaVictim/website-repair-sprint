@@ -11,9 +11,10 @@ Live site: <https://babavictim.github.io/website-repair-sprint/>
 Bitcoin Invoice Builder:
 <https://babavictim.github.io/website-repair-sprint/invoice/>
 
-The introductory sprint is $300 USD equivalent in Bitcoin. Scope, acceptance
-criteria, exchange-rate source, invoice amount, and authorized access are agreed
-in writing before work starts.
+The introductory public-site preflight report is $49 USD equivalent in Bitcoin;
+the repair sprint is $300. Scope, acceptance criteria, exchange-rate source,
+invoice amount, and any authorized access are agreed in writing before work
+starts.
 
 ## What is here
 
@@ -24,6 +25,8 @@ in writing before work starts.
 - Client intake, scope, QA, proposal, and delivery templates in [`docs/`](docs/)
 - A public, non-sensitive repair request form in
   [GitHub Issues](https://github.com/BabaVictim/website-repair-sprint/issues/new?template=repair-request.yml)
+- A public-site preflight request form in
+  [GitHub Issues](https://github.com/BabaVictim/website-repair-sprint/issues/new?template=preflight-request.yml)
 
 No testimonials or client results are fabricated. The repository itself is the
 working sample: source, safeguards, tests, and delivery process are visible.
@@ -114,6 +117,8 @@ required.
 
 - [`docs/service-scope-and-terms.md`](docs/service-scope-and-terms.md) — draft
   scope and terms; local legal review is still required
+- [`docs/preflight-report-scope-and-terms.md`](docs/preflight-report-scope-and-terms.md)
+  — read-only report boundaries, payment, and delivery terms
 - [`docs/client-intake-checklist.md`](docs/client-intake-checklist.md) —
   authorization, access, acceptance, and payment readiness
 - [`docs/proposal-template.md`](docs/proposal-template.md) — individualized
