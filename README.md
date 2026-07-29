@@ -3,6 +3,8 @@
 A fixed-scope, 48-hour repair service for existing websites, plus a free
 read-only preflight tool and the checklists used to deliver the work.
 
+Live site: <https://babavictim.github.io/website-repair-sprint/>
+
 The introductory sprint is $300 USD equivalent in Bitcoin. Scope, acceptance
 criteria, exchange-rate source, invoice amount, and authorized access are agreed
 in writing before work starts.

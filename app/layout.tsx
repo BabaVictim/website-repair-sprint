@@ -9,12 +9,18 @@ export const metadata: Metadata = {
   },
   description:
     "A fixed-scope engineering sprint for broken mobile layouts, forms, accessibility, metadata, and performance regressions.",
-  metadataBase: new URL("https://repair-sprint-atfc.openai.site"),
+  metadataBase: new URL(
+    "https://babavictim.github.io/website-repair-sprint/",
+  ),
+  alternates: {
+    canonical: "https://babavictim.github.io/website-repair-sprint/",
+  },
   openGraph: {
     title: "48-hour Website Repair Sprint",
     description:
       "One focused pass on an existing website. Tested patch, before/after report, and one revision.",
     type: "website",
+    url: "https://babavictim.github.io/website-repair-sprint/",
   },
   robots: {
     index: true,
