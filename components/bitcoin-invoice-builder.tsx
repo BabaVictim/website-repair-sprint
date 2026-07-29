@@ -3,11 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import QRCode from "qrcode";
-import {
-  PaymentRequestError,
-  createPaymentRequest,
-  formatSatsAsBtc,
-} from "@/lib/bitcoin-payment";
 import type {
   AmountUnit,
   BitcoinPaymentRequest,
@@ -18,6 +13,7 @@ import { PROJECT_RECEIVE_ADDRESS } from "@/lib/project-receive-address";
 export type ReceiveMode = "custom" | "project";
 
 type GeneratedRequest = {
+  amountBtc: string | null;
   payment: BitcoinPaymentRequest;
   qrDataUrl: string;
 };
@@ -41,6 +37,20 @@ const errorTargetIds: Record<PaymentRequestField, string> = {
   message: "invoice-message",
   form: "invoice-form-error",
 };
+
+function paymentErrorField(caught: unknown): PaymentRequestField {
+  if (
+    caught instanceof Error &&
+    caught.name === "PaymentRequestError" &&
+    "field" in caught &&
+    typeof caught.field === "string" &&
+    caught.field in errorTargetIds
+  ) {
+    return caught.field as PaymentRequestField;
+  }
+
+  return "form";
+}
 
 export function BitcoinInvoiceBuilder({
   initialMode = "custom",
@@ -116,6 +126,9 @@ export function BitcoinInvoiceBuilder({
     setActionMessage("");
 
     try {
+      const { createPaymentRequest, formatSatsAsBtc } = await import(
+        "@/lib/bitcoin-payment"
+      );
       const payment = createPaymentRequest({
         address:
           mode === "project" ? PROJECT_RECEIVE_ADDRESS : address,
@@ -142,7 +155,14 @@ export function BitcoinInvoiceBuilder({
       setResultMessage(
         "Payment request generated. Verify the amount and recipient before sharing.",
       );
-      setGenerated({ payment, qrDataUrl });
+      setGenerated({
+        amountBtc:
+          payment.amountSats === null
+            ? null
+            : formatSatsAsBtc(payment.amountSats),
+        payment,
+        qrDataUrl,
+      });
     } catch (caught) {
       if (generationVersion.current !== requestVersion) {
         return;
@@ -152,8 +172,7 @@ export function BitcoinInvoiceBuilder({
         caught instanceof Error
           ? caught.message
           : "Could not create the payment request.";
-      const nextField =
-        caught instanceof PaymentRequestError ? caught.field : "form";
+      const nextField = paymentErrorField(caught);
 
       setError(nextError);
       setErrorField(nextField);
@@ -445,7 +464,7 @@ export function BitcoinInvoiceBuilder({
                       ) : (
                         <>
                           <span className="summary-primary">
-                            {formatSatsAsBtc(generated.payment.amountSats)} BTC
+                            {generated.amountBtc} BTC
                           </span>
                           <span className="summary-secondary">
                             {formatSatoshis(generated.payment.amountSats)} sats

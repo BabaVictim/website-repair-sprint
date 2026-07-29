@@ -9,9 +9,6 @@ export const metadata: Metadata = {
   },
   description:
     "A fixed-scope engineering sprint for broken mobile layouts, forms, accessibility, metadata, and performance regressions.",
-  metadataBase: new URL(
-    "https://babavictim.github.io/website-repair-sprint/",
-  ),
   alternates: {
     canonical: "https://babavictim.github.io/website-repair-sprint/",
   },

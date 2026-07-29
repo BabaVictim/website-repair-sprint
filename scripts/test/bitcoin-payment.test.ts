@@ -7,6 +7,7 @@ import {
   parseAmountToSats,
   validateMainnetAddress,
 } from "../../lib/bitcoin-payment.ts";
+import { PROJECT_RECEIVE_ADDRESS } from "../../lib/project-receive-address.ts";
 
 const validMainnetAddresses = [
   "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
@@ -19,6 +20,13 @@ test("accepts checksum-valid legacy, SegWit v0, and Taproot mainnet addresses", 
   for (const address of validMainnetAddresses) {
     assert.equal(validateMainnetAddress(address), address);
   }
+});
+
+test("keeps the published project receive address checksum-valid", () => {
+  assert.equal(
+    validateMainnetAddress(PROJECT_RECEIVE_ADDRESS),
+    PROJECT_RECEIVE_ADDRESS,
+  );
 });
 
 test("rejects other networks, bad checksums, mixed case, and non-address keys", () => {

@@ -162,6 +162,7 @@ try {
         request.method === "GET" &&
         !request.postData &&
         (request.url.includes("/_next/static/") ||
+          new URL(request.url).pathname.startsWith("/assets/") ||
           request.url.endsWith("/favicon.ico") ||
           request.url.startsWith("data:") ||
           request.url.startsWith("blob:")),
