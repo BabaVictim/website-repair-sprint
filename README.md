@@ -1,9 +1,13 @@
 # Website Repair Sprint
 
 A fixed-scope, 48-hour repair service for existing websites, plus a free
-read-only preflight tool and the checklists used to deliver the work.
+read-only preflight tool, a private Bitcoin payment-request builder, and the
+checklists used to deliver the work.
 
 Live site: <https://babavictim.github.io/website-repair-sprint/>
+
+Bitcoin Invoice Builder:
+<https://babavictim.github.io/website-repair-sprint/invoice/>
 
 The introductory sprint is $300 USD equivalent in Bitcoin. Scope, acceptance
 criteria, exchange-rate source, invoice amount, and authorized access are agreed
@@ -12,6 +16,8 @@ in writing before work starts.
 ## What is here
 
 - The public service site in [`app/`](app/)
+- A client-side Bitcoin payment-request and QR builder at
+  [`app/invoice/`](app/invoice/)
 - A zero-dependency website preflight CLI in [`tools/`](tools/)
 - Client intake, scope, QA, proposal, and delivery templates in [`docs/`](docs/)
 - A public, non-sensitive repair request form in
@@ -22,7 +28,7 @@ working sample: source, safeguards, tests, and delivery process are visible.
 
 ## Run the service site
 
-Requirements: Node.js 22 or newer and npm.
+Requirements: Node.js 22.12 or newer and npm.
 
 ```sh
 npm install
@@ -37,6 +43,37 @@ npm test
 npm run build
 npm audit --audit-level=moderate
 ```
+
+The browser interaction suite additionally requires Chromium. With the local
+site running in another terminal:
+
+```sh
+npm run test:browser
+```
+
+Set `CHROMIUM_PATH` or `INVOICE_TEST_URL` when Chromium or the test site uses a
+different location.
+
+## Use the Bitcoin Invoice Builder
+
+The builder emits the conservative, on-chain
+[BIP 321](https://github.com/bitcoin/bips/blob/master/bip-0321.mediawiki)
+subset understood by existing BIP 21 wallets:
+`bitcoin:<address>?amount=...&label=...&message=...`.
+
+- Standard mainnet legacy, SegWit v0, and 32-byte Taproot addresses are
+  checksum-validated locally; undefined future witness versions are rejected.
+- BTC and satoshi amounts use exact integer arithmetic and are never converted
+  through JavaScript floating-point numbers.
+- The QR code is generated locally from the same immutable URI shown in the
+  result.
+- Drafts are kept in React memory only. There is no account, backend,
+  analytics, cookie, local storage, wallet connection, balance lookup, key
+  generation, signing, or transaction broadcast.
+
+This is a payment-request helper, not a tax invoice, processor, payment
+monitor, or proof of payment. Never enter a seed phrase, private key, WIF, or
+extended private key.
 
 ## Run the free preflight
 
@@ -81,4 +118,5 @@ Tips do not book work. Agree a written scope before paying a service invoice.
 
 ## License
 
-MIT. See [`LICENSE`](LICENSE).
+MIT. See [`LICENSE`](LICENSE) and
+[`public/third-party-notices.txt`](public/third-party-notices.txt).

@@ -49,8 +49,25 @@ button,
 }
 
 :focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--focus) 40%, transparent);
+  outline: 3px solid var(--focus);
   outline-offset: 3px;
+}
+
+.address-box :focus-visible {
+  outline-color: #7dd3fc;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 .site-header {
@@ -462,6 +479,13 @@ h1 {
   text-underline-offset: 4px;
 }
 
+.support-links {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
 .address-box {
   background: var(--ink);
   border-radius: 8px;
@@ -522,6 +546,462 @@ h1 {
   margin-bottom: 0;
 }
 
+.invoice-intro {
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 72px 24px 44px;
+}
+
+.invoice-intro h1 {
+  margin-bottom: 24px;
+}
+
+.invoice-intro .lede {
+  margin-bottom: 20px;
+  max-width: 760px;
+}
+
+.invoice-definition {
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 0;
+  max-width: 760px;
+  padding: 3px 0 3px 14px;
+}
+
+.builder-section {
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 0 24px 88px;
+}
+
+.invoice-builder {
+  align-items: start;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(330px, 0.8fr) minmax(0, 1.2fr);
+}
+
+.invoice-form,
+.invoice-output {
+  background: var(--surface);
+  border: 1px solid var(--strong-line);
+  border-radius: 9px;
+  padding: 26px;
+}
+
+.mode-picker {
+  border: 0;
+  margin: 0 0 28px;
+  padding: 0;
+}
+
+.mode-picker legend {
+  font-size: 15px;
+  font-weight: 750;
+  margin-bottom: 11px;
+}
+
+.mode-picker > label {
+  align-items: start;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  cursor: pointer;
+  display: flex;
+  gap: 11px;
+  margin-bottom: 9px;
+  padding: 13px;
+}
+
+.mode-picker > label:hover {
+  border-color: var(--strong-line);
+}
+
+.mode-picker > label.selected {
+  background: #fcf2e8;
+  border-color: var(--accent);
+}
+
+.mode-picker input {
+  accent-color: var(--accent);
+  margin: 4px 0 0;
+}
+
+.mode-picker span,
+.mode-picker strong,
+.mode-picker small {
+  display: block;
+}
+
+.mode-picker strong {
+  font-size: 14px;
+}
+
+.mode-picker small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 450;
+  margin-top: 2px;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-field > label,
+.field-label-row label {
+  display: block;
+  font-size: 14px;
+  font-weight: 750;
+  margin-bottom: 7px;
+}
+
+.form-field label span {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.field-label-row {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+}
+
+.field-label-row small {
+  color: var(--muted);
+  font-size: 12px;
+  margin-left: 12px;
+  text-align: right;
+}
+
+.invoice-form input[type="text"],
+.invoice-form select,
+.invoice-form textarea,
+.request-details textarea {
+  background: white;
+  border: 1px solid var(--strong-line);
+  border-radius: 6px;
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  outline: none;
+  width: 100%;
+}
+
+.invoice-form input[type="text"],
+.invoice-form select {
+  min-height: 44px;
+  padding: 9px 11px;
+}
+
+.invoice-form textarea,
+.request-details textarea {
+  padding: 10px 11px;
+  resize: vertical;
+}
+
+.invoice-form input[type="text"]:focus,
+.invoice-form select:focus,
+.invoice-form textarea:focus,
+.request-details textarea:focus {
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 14%, transparent);
+}
+
+.form-row {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) 104px;
+}
+
+.form-row .form-field {
+  margin-bottom: 0;
+}
+
+.amount-row {
+  margin-bottom: 5px;
+}
+
+.amount-help {
+  margin-bottom: 5px;
+}
+
+.field-help,
+.local-note,
+.project-recipient > p:last-child {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 6px 0 0;
+}
+
+.form-message {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  margin: 5px 0 20px;
+}
+
+.form-message:empty {
+  margin-bottom: 15px;
+}
+
+.project-recipient {
+  background: var(--accent-soft);
+  border: 1px solid #dfbea0;
+  border-radius: 7px;
+  margin-bottom: 22px;
+  padding: 15px;
+}
+
+.project-recipient > p:first-child {
+  font-size: 12px;
+  font-weight: 750;
+  margin-bottom: 6px;
+}
+
+.project-recipient code,
+.output-field code {
+  display: block;
+  font-family: "IBM Plex Mono", "Nimbus Mono PS", monospace;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.form-error {
+  background: #fff1f0;
+  border: 1px solid #e2aaa4;
+  border-radius: 6px;
+  color: #8f2f26;
+  font-size: 13px;
+  margin: 0 0 16px;
+  padding: 10px 12px;
+}
+
+.generate-button {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  width: 100%;
+}
+
+.local-note {
+  margin-top: 11px;
+  text-align: center;
+}
+
+.invoice-output {
+  background: transparent;
+  border-style: dashed;
+  min-height: 540px;
+}
+
+.invoice-output.has-result {
+  background: var(--surface);
+  border-style: solid;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(210px, 0.8fr) minmax(0, 1.2fr);
+}
+
+.output-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 485px;
+  padding: 10%;
+  text-align: center;
+}
+
+.output-placeholder h2,
+.request-details h2,
+.invoice-safety h2 {
+  font-size: clamp(24px, 3vw, 34px);
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+}
+
+.output-placeholder p:last-child {
+  color: var(--muted);
+  margin: 0 auto;
+  max-width: 420px;
+}
+
+.output-kicker {
+  color: var(--accent-hover);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin-bottom: 11px;
+  text-transform: uppercase;
+}
+
+.qr-panel,
+.request-details {
+  min-width: 0;
+}
+
+.qr-frame {
+  align-items: center;
+  background: #fffdf9;
+  border: 1px solid var(--line);
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+}
+
+.qr-frame img {
+  display: block;
+  height: auto;
+  image-rendering: pixelated;
+  max-width: 100%;
+}
+
+.qr-caption {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 12px 0 0;
+}
+
+.request-details h2 {
+  margin-bottom: 23px;
+}
+
+.request-details h2:focus {
+  scroll-margin-top: 20px;
+}
+
+.output-field {
+  border-top: 1px solid var(--line);
+  margin-bottom: 18px;
+  padding-top: 14px;
+}
+
+.output-field > p,
+.output-field > label {
+  color: var(--muted);
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.request-details textarea {
+  font-family: "IBM Plex Mono", "Nimbus Mono PS", monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.request-summary dl {
+  margin: 0;
+}
+
+.request-summary dl > div {
+  align-items: start;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 72px minmax(0, 1fr);
+  padding: 9px 0;
+}
+
+.request-summary dl > div:first-child {
+  border-top: 0;
+}
+
+.request-summary dt {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.request-summary dd {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.request-summary dd .summary-primary,
+.request-summary dd .summary-secondary {
+  display: block;
+}
+
+.request-summary dd .summary-primary {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.request-summary dd .summary-secondary {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.output-field code.print-uri,
+.print-warning {
+  display: none;
+}
+
+.output-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.output-actions .button {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  min-height: 40px;
+  padding: 8px 11px;
+}
+
+.action-message {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  margin: 10px 0 0;
+}
+
+.invoice-safety {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 56px;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 72px 24px 84px;
+}
+
+.invoice-safety h2 {
+  margin-bottom: 0;
+}
+
+.invoice-safety ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.invoice-safety li {
+  border-top: 1px solid var(--line);
+  padding: 14px 0 14px 28px;
+  position: relative;
+}
+
+.invoice-safety li::before {
+  color: var(--accent);
+  content: "!";
+  font-weight: 800;
+  left: 4px;
+  position: absolute;
+}
+
 footer {
   align-items: center;
   border-top: 1px solid var(--line);
@@ -557,6 +1037,12 @@ footer .footer-note {
   color: var(--muted);
   font-weight: 400;
   text-align: right;
+}
+
+@media (max-width: 980px) {
+  .invoice-builder {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 820px) {
@@ -598,6 +1084,19 @@ footer .footer-note {
     grid-template-columns: 1fr;
   }
 
+  .invoice-output {
+    min-height: 440px;
+  }
+
+  .output-placeholder {
+    min-height: 385px;
+  }
+
+  .invoice-safety {
+    gap: 30px;
+    grid-template-columns: 1fr;
+  }
+
   footer {
     align-items: start;
     grid-template-columns: 1fr auto;
@@ -624,7 +1123,10 @@ footer .footer-note {
 
   .hero,
   .content-section,
-  .support-section {
+  .support-section,
+  .invoice-intro,
+  .builder-section,
+  .invoice-safety {
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -657,7 +1159,8 @@ footer .footer-note {
   }
 
   .content-section,
-  .support-section {
+  .support-section,
+  .invoice-safety {
     padding-bottom: 64px;
     padding-top: 64px;
   }
@@ -665,8 +1168,33 @@ footer .footer-note {
   .scope-grid > div,
   .delivery-card,
   .fit-check,
-  .address-box {
+  .address-box,
+  .invoice-form,
+  .invoice-output {
     padding: 21px;
+  }
+
+  .invoice-intro {
+    padding-bottom: 34px;
+    padding-top: 52px;
+  }
+
+  .builder-section {
+    padding-bottom: 64px;
+  }
+
+  .invoice-output.has-result {
+    grid-template-columns: 1fr;
+  }
+
+  .output-placeholder {
+    min-height: 330px;
+    padding: 6%;
+  }
+
+  .output-actions {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .address-actions {
@@ -680,10 +1208,15 @@ footer .footer-note {
   }
 
   footer {
+    grid-template-columns: 1fr;
     margin-left: 16px;
     margin-right: 16px;
     padding-left: 0;
     padding-right: 0;
+  }
+
+  footer > div {
+    flex-wrap: wrap;
   }
 }
 
@@ -697,5 +1230,73 @@ footer .footer-note {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  @page {
+    margin: 14mm;
+  }
+
+  body {
+    background: white;
+  }
+
+  .invoice-page .site-header,
+  .invoice-intro,
+  .invoice-form,
+  .invoice-safety,
+  .invoice-page footer,
+  .output-actions,
+  .action-message {
+    display: none !important;
+  }
+
+  .builder-section {
+    max-width: none;
+    padding: 0;
+  }
+
+  .invoice-builder,
+  .invoice-output.has-result {
+    display: block;
+  }
+
+  .invoice-output {
+    border: 0;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .request-details textarea {
+    display: none;
+  }
+
+  .output-field code.print-uri {
+    display: block;
+    font-family: "IBM Plex Mono", "Nimbus Mono PS", monospace;
+    font-size: 10pt;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .print-warning {
+    border-top: 1px solid var(--line);
+    display: block;
+    font-size: 10pt;
+    margin: 18px 0 0;
+    padding-top: 12px;
+  }
+
+  .qr-panel,
+  .request-details {
+    break-inside: avoid;
+    margin: 0 auto 20px;
+    max-width: 620px;
+  }
+
+  .qr-frame img {
+    margin: 0 auto;
+    max-width: 82mm;
   }
 }

@@ -26,6 +26,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  referrer: "no-referrer",
 };
 
 export default function RootLayout({
@@ -35,6 +36,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="default-src 'self'; base-uri 'none'; connect-src 'self'; font-src 'self'; form-action 'none'; frame-src 'none'; img-src 'self' data: blob:; object-src 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; worker-src 'none'"
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

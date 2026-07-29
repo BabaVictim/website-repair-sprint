@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CopyAddress } from "@/components/copy-address";
 
 const requestUrl =
@@ -56,6 +57,7 @@ export default function Home() {
           <a href="#scope">Scope</a>
           <a href="#process">Process</a>
           <a href="#price">Price</a>
+          <Link href="/invoice/">Invoice tool</Link>
           <a className="nav-cta" href={requestUrl}>
             Request a sprint
           </a>
@@ -212,12 +214,17 @@ export default function Home() {
             tool. Use them freely. If they save you time, you can support the
             work with a Bitcoin tip.
           </p>
-          <a
-            className="text-link"
-            href="https://github.com/BabaVictim/website-repair-sprint"
-          >
-            View the free repair kit on GitHub
-          </a>
+          <div className="support-links">
+            <a
+              className="text-link"
+              href="https://github.com/BabaVictim/website-repair-sprint"
+            >
+              View the free repair kit
+            </a>
+            <Link className="text-link" href="/invoice/#project">
+              Build a Bitcoin payment request
+            </Link>
+          </div>
         </div>
         <CopyAddress />
       </section>
@@ -227,6 +234,8 @@ export default function Home() {
         <div>
           <a href="#scope">Scope</a>
           <a href={requestUrl}>Request</a>
+          <Link href="/invoice/">Invoice tool</Link>
+          <Link href="/third-party-notices.txt">Licenses</Link>
           <a href="https://github.com/BabaVictim/website-repair-sprint">
             Source
           </a>
