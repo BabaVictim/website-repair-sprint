@@ -89,6 +89,25 @@ npm run audit:site -- --json https://example.com/
 See [`tools/README.md`](tools/README.md) for checks, safety controls, options,
 and exit codes.
 
+## Run it in GitHub Actions
+
+Use the same bounded preflight in a workflow without an install step or token:
+
+```yaml
+permissions:
+  contents: read
+
+steps:
+  - uses: BabaVictim/website-repair-sprint@v1
+    with:
+      url: https://example.com/
+```
+
+The step succeeds when checks pass or only warn, and fails when a check fails or
+the target cannot be audited safely. Set `json: "true"` for machine-readable
+stdout. Pin a full commit SHA instead of `v1` when immutable dependencies are
+required.
+
 ## Documents
 
 - [`docs/service-scope-and-terms.md`](docs/service-scope-and-terms.md) — draft

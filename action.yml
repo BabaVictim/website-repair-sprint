@@ -1,0 +1,20 @@
+name: Safe Site Preflight
+description: Audit one public HTTP(S) URL with bounded, read-only checks.
+author: BabaVictim
+
+inputs:
+  url:
+    description: Public HTTP(S) URL on port 80 or 443.
+    required: true
+  json:
+    description: Print the audit as JSON instead of human-readable text.
+    required: false
+    default: "false"
+
+runs:
+  using: node24
+  main: action/index.mjs
+
+branding:
+  icon: check-circle
+  color: orange

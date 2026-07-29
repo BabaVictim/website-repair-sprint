@@ -10,7 +10,8 @@ import {
   parseArgs,
   parseTargetUrl,
   renderHuman,
-  resolvePublicHost
+  resolvePublicHost,
+  sanitizeHumanText
 } from '../site-preflight.mjs';
 
 function fakeResponse(overrides = {}) {
@@ -213,6 +214,30 @@ test('audit follows a bounded redirect and produces checks and summaries', async
   assert.match(human, /Site Preflight Audit/);
   assert.match(human, /301 http:\/\/example\.com\/ -> https:\/\/example\.com\/home/);
   assert.match(human, /PASS\s+HTTP status/);
+});
+
+test('human output escapes workflow commands and bounds remote-controlled text', async () => {
+  const body = Buffer.from(`
+    <html lang="en">
+      <head>
+        <title>${'A'.repeat(1_100)}</title>
+        <link rel="canonical" href="https://safe.example/&#10;::add-mask::REMOTE-CONTROLLED">
+      </head>
+      <body><h1>Home</h1></body>
+    </html>
+  `);
+  const result = await auditUrl('https://example.com/', {
+    requestPage: async () => fakeResponse({
+      body,
+      bytesRead: body.length
+    })
+  });
+  const human = renderHuman(result, { color: false });
+
+  assert.doesNotMatch(human, /(?:^|\n)::add-mask::/);
+  assert.match(human, /\\u000a::add-mask::REMOTE-CONTROLLED/);
+  assert.match(human, /A{20}…/);
+  assert.equal(sanitizeHumanText('\u001b[31mred\u2028line'), '\\u001b[31mred\\u2028line');
 });
 
 test('audit rejects redirect loops before another request', async () => {

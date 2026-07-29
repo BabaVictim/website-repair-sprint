@@ -14,6 +14,7 @@ const DEFAULT_MAX_BYTES = 1_048_576;
 const DEFAULT_MAX_REDIRECTS = 5;
 const MAX_TIMEOUT_MS = 30_000;
 const MAX_BODY_BYTES = 5_242_880;
+const MAX_HUMAN_FIELD_LENGTH = 1_000;
 const REDIRECT_STATUSES = new Set([301, 302, 303, 307, 308]);
 const LOCAL_HOST_SUFFIXES = ['.localhost', '.local', '.internal', '.home', '.lan'];
 
@@ -801,13 +802,24 @@ function symbolFor(status, color) {
   return symbols[status];
 }
 
+export function sanitizeHumanText(value) {
+  const source = String(value ?? '');
+  const truncated = source.length > MAX_HUMAN_FIELD_LENGTH;
+  const bounded = truncated ? source.slice(0, MAX_HUMAN_FIELD_LENGTH) : source;
+  const escaped = bounded.replace(
+    /[\u0000-\u001f\u007f-\u009f\u2028\u2029]/g,
+    (character) => `\\u${character.codePointAt(0).toString(16).padStart(4, '0')}`
+  );
+  return truncated ? `${escaped}…` : escaped;
+}
+
 export function renderHuman(result, options = {}) {
   const color = options.color ?? process.stdout.isTTY;
   const lines = [
     'Site Preflight Audit',
-    `Target: ${result.initialUrl}`,
-    `Final:  ${result.finalUrl}`,
-    `Status: ${result.response.statusCode}${result.response.statusMessage ? ` ${result.response.statusMessage}` : ''}`,
+    `Target: ${sanitizeHumanText(result.initialUrl)}`,
+    `Final:  ${sanitizeHumanText(result.finalUrl)}`,
+    `Status: ${result.response.statusCode}${result.response.statusMessage ? ` ${sanitizeHumanText(result.response.statusMessage)}` : ''}`,
     `Timing: ${result.response.timings.totalMs} ms total (${result.response.timings.dnsMs} ms DNS, ${result.response.timings.firstByteMs} ms first byte)`,
     `Body:   ${result.response.bytesRead} bytes${result.response.truncated ? ' (truncated at safety limit)' : ''}`,
     `Summary: ${result.summary.pass} passed, ${result.summary.warn} warnings, ${result.summary.fail} failed, ${result.summary.info} informational`,
@@ -817,7 +829,9 @@ export function renderHuman(result, options = {}) {
   if (result.redirects.length > 0) {
     lines.push('Redirects:');
     for (const redirect of result.redirects) {
-      lines.push(`  ${redirect.statusCode} ${redirect.from} -> ${redirect.to}`);
+      lines.push(
+        `  ${redirect.statusCode} ${sanitizeHumanText(redirect.from)} -> ${sanitizeHumanText(redirect.to)}`
+      );
     }
     lines.push('');
   }
@@ -825,7 +839,9 @@ export function renderHuman(result, options = {}) {
   lines.push('Checks:');
   const labelWidth = Math.max(...result.checks.map(({ label }) => label.length));
   for (const item of result.checks) {
-    lines.push(`  ${symbolFor(item.status, color)}  ${item.label.padEnd(labelWidth)}  ${item.detail}`);
+    lines.push(
+      `  ${symbolFor(item.status, color)}  ${item.label.padEnd(labelWidth)}  ${sanitizeHumanText(item.detail)}`
+    );
   }
   return `${lines.join('\n')}\n`;
 }
@@ -939,7 +955,7 @@ export async function main(argv = process.argv.slice(2)) {
         }
       }, null, 2)}\n`);
     } else {
-      process.stderr.write(`Error [${auditError.code}]: ${auditError.message}\n`);
+      process.stderr.write(`Error [${auditError.code}]: ${sanitizeHumanText(auditError.message)}\n`);
       if (auditError.code === 'EARGS') process.stderr.write('\nRun with --help for usage.\n');
     }
     return 1;
