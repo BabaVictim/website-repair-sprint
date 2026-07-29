@@ -37,6 +37,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link
+          rel="sitemap"
+          type="application/xml"
+          href="https://babavictim.github.io/website-repair-sprint/sitemap.xml"
+        />
         <meta
           httpEquiv="Content-Security-Policy"
           content="default-src 'self'; base-uri 'none'; connect-src 'self'; font-src 'self'; form-action 'none'; frame-src 'none'; img-src 'self' data: blob:; object-src 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; worker-src 'none'"

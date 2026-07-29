@@ -4,6 +4,23 @@ import { CopyAddress } from "@/components/copy-address";
 const requestUrl =
   "https://github.com/BabaVictim/website-repair-sprint/issues/new?template=repair-request.yml";
 
+const serviceStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "48-hour Website Repair Sprint",
+  serviceType: "Website repair and frontend engineering",
+  description:
+    "A fixed-scope engineering sprint for existing websites with a tested patch, before-and-after report, and one focused revision.",
+  url: "https://babavictim.github.io/website-repair-sprint/",
+  offers: {
+    "@type": "Offer",
+    price: "300",
+    priceCurrency: "USD",
+    availability: "https://schema.org/LimitedAvailability",
+    url: requestUrl,
+  },
+};
+
 const included = [
   "Mobile layout and visible UI breakage",
   "Forms, calls to action, and broken interaction paths",
@@ -46,6 +63,15 @@ const steps = [
 export default function Home() {
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(serviceStructuredData).replace(
+            /</g,
+            "\\u003c",
+          ),
+        }}
+      />
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Website Repair Sprint home">
           <span className="brand-mark" aria-hidden="true">
@@ -221,7 +247,7 @@ export default function Home() {
             >
               View the free repair kit
             </a>
-            <Link className="text-link" href="/invoice/#project">
+            <Link className="text-link" href="/invoice/project/">
               Build a Bitcoin payment request
             </Link>
           </div>

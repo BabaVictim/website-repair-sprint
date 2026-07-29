@@ -3,6 +3,29 @@ import Link from "next/link";
 import { BitcoinInvoiceBuilder } from "@/components/bitcoin-invoice-builder";
 import type { ReceiveMode } from "@/components/bitcoin-invoice-builder";
 
+const invoiceAppStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Bitcoin Invoice Builder",
+  applicationCategory: "FinanceApplication",
+  operatingSystem: "Any",
+  url: "https://babavictim.github.io/website-repair-sprint/invoice/",
+  description:
+    "A free, client-side tool for creating mainnet Bitcoin payment request URIs and QR codes without an account or backend.",
+  isAccessibleForFree: true,
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  featureList: [
+    "Mainnet Bitcoin address validation",
+    "Exact BTC and satoshi amount handling",
+    "BIP 21-compatible payment request URIs",
+    "Local QR code generation",
+  ],
+};
+
 export const metadata: Metadata = {
   title: "Bitcoin Invoice Builder",
   description:
@@ -120,5 +143,18 @@ export function InvoicePageContent({
 }
 
 export default function InvoicePage() {
-  return <InvoicePageContent />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(invoiceAppStructuredData).replace(
+            /</g,
+            "\\u003c",
+          ),
+        }}
+      />
+      <InvoicePageContent />
+    </>
+  );
 }
