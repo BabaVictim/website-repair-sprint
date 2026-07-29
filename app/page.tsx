@@ -268,6 +268,12 @@ export default function Home() {
             >
               View the free repair kit
             </a>
+            <a
+              className="text-link"
+              href="https://github.com/BabaVictim/safe-site-preflight"
+            >
+              Use the Safe Site Preflight Action
+            </a>
             <Link className="text-link" href="/invoice/project/">
               Build a Bitcoin payment request
             </Link>

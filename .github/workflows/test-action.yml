@@ -48,7 +48,7 @@ jobs:
       - name: Reject a private-network target through the published tag
         id: released-private-target
         continue-on-error: true
-        uses: BabaVictim/website-repair-sprint@v1
+        uses: BabaVictim/safe-site-preflight@v1
         with:
           url: http://127.0.0.1/
 

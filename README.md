@@ -21,7 +21,8 @@ starts.
 - The public service site in [`app/`](app/)
 - A client-side Bitcoin payment-request and QR builder at
   [`app/invoice/`](app/invoice/)
-- A zero-dependency website preflight CLI in [`tools/`](tools/)
+- A zero-dependency website preflight CLI in [`tools/`](tools/) and its
+  canonical [Safe Site Preflight Action](https://github.com/BabaVictim/safe-site-preflight)
 - Client intake, scope, QA, proposal, and delivery templates in [`docs/`](docs/)
 - A public, non-sensitive repair request form in
   [GitHub Issues](https://github.com/BabaVictim/website-repair-sprint/issues/new?template=repair-request.yml)
@@ -103,7 +104,7 @@ permissions:
   contents: read
 
 steps:
-  - uses: BabaVictim/website-repair-sprint@v1
+  - uses: BabaVictim/safe-site-preflight@v1
     with:
       url: https://example.com/
 ```
@@ -111,7 +112,9 @@ steps:
 The step succeeds when checks pass or only warn, and fails when a check fails or
 the target cannot be audited safely. Set `json: "true"` for machine-readable
 stdout. Pin a full commit SHA instead of `v1` when immutable dependencies are
-required.
+required. The original `BabaVictim/website-repair-sprint@v1` path remains
+available for compatibility, but the dedicated repository is canonical for new
+users and releases.
 
 ## Documents
 
