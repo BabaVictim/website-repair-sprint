@@ -1,5 +1,7 @@
 # Website Repair Sprint
 
+[![Safe Site Preflight tests](https://github.com/BabaVictim/website-repair-sprint/actions/workflows/test-action.yml/badge.svg)](https://github.com/BabaVictim/website-repair-sprint/actions/workflows/test-action.yml)
+
 A fixed-scope, 48-hour repair service for existing websites, plus a free
 read-only preflight tool, a private Bitcoin payment-request builder, and the
 checklists used to deliver the work.

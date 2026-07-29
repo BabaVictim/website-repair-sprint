@@ -40,3 +40,19 @@ jobs:
         env:
           ACTION_OUTCOME: ${{ steps.private-target.outcome }}
         run: test "$ACTION_OUTCOME" = failure
+
+  released-action:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Reject a private-network target through the published tag
+        id: released-private-target
+        continue-on-error: true
+        uses: BabaVictim/website-repair-sprint@v1
+        with:
+          url: http://127.0.0.1/
+
+      - name: Confirm the published tag rejected the target
+        env:
+          ACTION_OUTCOME: ${{ steps.released-private-target.outcome }}
+        run: test "$ACTION_OUTCOME" = failure
