@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/prepare-sites-dist.mjs",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test": "node --test --experimental-strip-types scripts/test/*.test.mjs scripts/test/*.test.ts && npm --prefix tools test",
