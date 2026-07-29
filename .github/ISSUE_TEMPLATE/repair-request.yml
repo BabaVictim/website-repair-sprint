@@ -1,0 +1,61 @@
+name: Request a website repair sprint
+description: Share a public, non-sensitive outline for a fixed-scope repair.
+title: "[Repair request] "
+labels:
+  - repair-request
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is public. Do not include passwords, API keys, private repository URLs, customer data, vulnerability details, or anything you are not authorized to share.
+  - type: input
+    id: public-url
+    attributes:
+      label: Public website URL
+      description: Leave blank if the site is not public; describe the stack below instead.
+      placeholder: https://example.com
+  - type: dropdown
+    id: stack
+    attributes:
+      label: Known stack
+      options:
+        - Next.js / React
+        - WordPress
+        - Shopify
+        - Static HTML/CSS/JavaScript
+        - Another stack
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: symptoms
+    attributes:
+      label: What is broken or underperforming?
+      description: Describe visible symptoms and where they occur. Do not include sensitive data.
+      placeholder: On mobile, the checkout button sits below the viewport...
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What would make the sprint successful?
+      description: Give one or two outcomes that can be verified.
+      placeholder: The checkout button remains visible from 320px wide, and the form completes with keyboard-only input.
+    validations:
+      required: true
+  - type: input
+    id: deadline
+    attributes:
+      label: Deadline or preferred start
+      placeholder: No hard deadline / YYYY-MM-DD
+  - type: checkboxes
+    id: authorization
+    attributes:
+      label: Authorization
+      options:
+        - label: I own this site or am authorized by its owner to request changes.
+          required: true
+        - label: I understand that scope and payment are agreed in writing before work starts.
+          required: true
+        - label: I have not included credentials or private information in this issue.
+          required: true

@@ -1,0 +1,16 @@
+{
+  "name": "site-preflight",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A small, read-only website preflight audit CLI.",
+  "type": "module",
+  "bin": {
+    "site-preflight": "./site-preflight.mjs"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
