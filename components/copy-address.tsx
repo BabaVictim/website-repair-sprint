@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const address = "bc1qgaxryak5yss9x7m7jwjx6337v3q9pl7wjxatfc";
+const address = "bc1qm7nrve8325p20nqxk89dl6tyc9349cym9n0kh0";
 
 export function CopyAddress() {
   const [copied, setCopied] = useState(false);

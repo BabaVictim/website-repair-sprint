@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test": "npm --prefix tools test",
+    "test": "node --test scripts/test/*.test.mjs && npm --prefix tools test",
+    "wallet:new": "node scripts/generate-bitcoin-wallet.mjs --force",
+    "wallet:status": "node scripts/wallet-status.mjs",
     "audit:site": "node tools/site-preflight.mjs"
   },
   "dependencies": {

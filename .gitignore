@@ -10,3 +10,8 @@ coverage/
 *.tgz
 .screenshots/
 *.tsbuildinfo
+
+# Local project treasury. This file contains a live Bitcoin private key.
+address.txt
+address.txt.tmp-*
+treasury-ledger.csv
