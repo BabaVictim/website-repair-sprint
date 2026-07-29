@@ -15,7 +15,7 @@ import type {
 } from "@/lib/bitcoin-payment";
 import { PROJECT_RECEIVE_ADDRESS } from "@/lib/project-receive-address";
 
-type ReceiveMode = "custom" | "project";
+export type ReceiveMode = "custom" | "project";
 
 type GeneratedRequest = {
   payment: BitcoinPaymentRequest;
@@ -42,8 +42,12 @@ const errorTargetIds: Record<PaymentRequestField, string> = {
   form: "invoice-form-error",
 };
 
-export function BitcoinInvoiceBuilder() {
-  const [mode, setMode] = useState<ReceiveMode>("custom");
+export function BitcoinInvoiceBuilder({
+  initialMode = "custom",
+}: {
+  initialMode?: ReceiveMode;
+}) {
+  const [mode, setMode] = useState<ReceiveMode>(initialMode);
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState("");
   const [amountUnit, setAmountUnit] = useState<AmountUnit>("btc");

@@ -7,6 +7,7 @@ import puppeteer from "puppeteer-core";
 const targetUrl =
   process.env.INVOICE_TEST_URL ??
   "http://localhost:3000/invoice/";
+const projectUrl = new URL("project/", targetUrl).href;
 const chromiumPath = process.env.CHROMIUM_PATH ?? "/snap/bin/chromium";
 const screenshotsDirectory = new URL("../../.screenshots/", import.meta.url);
 const customAddress = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
@@ -229,7 +230,7 @@ try {
     "true",
   );
 
-  await page.goto(`${targetUrl}#project`, { waitUntil: "networkidle0" });
+  await page.goto(projectUrl, { waitUntil: "networkidle0" });
   await page.waitForFunction(
     () => document.querySelector('input[value="project"]')?.checked,
   );
@@ -300,7 +301,7 @@ try {
   );
 
   console.log(
-    "Invoice browser checks passed: exact URI/QR parity, quiet zone, validation/focus, amount-unit safety, printable output, stale-result clearing, project mode, mobile layout, and no draft-data or third-party requests.",
+    "Invoice browser checks passed: exact URI/QR parity, quiet zone, validation/focus, amount-unit safety, printable output, stale-result clearing, project support route, mobile layout, and no draft-data or third-party requests.",
   );
 } finally {
   await browser.close();

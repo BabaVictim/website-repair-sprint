@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BitcoinInvoiceBuilder } from "@/components/bitcoin-invoice-builder";
+import type { ReceiveMode } from "@/components/bitcoin-invoice-builder";
 
 export const metadata: Metadata = {
   title: "Bitcoin Invoice Builder",
@@ -19,7 +20,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function InvoicePage() {
+export function InvoicePageContent({
+  initialMode = "custom",
+}: {
+  initialMode?: ReceiveMode;
+}) {
   return (
     <main className="invoice-page">
       <header className="site-header">
@@ -63,7 +68,7 @@ export default function InvoicePage() {
       </section>
 
       <section className="builder-section" id="builder">
-        <BitcoinInvoiceBuilder />
+        <BitcoinInvoiceBuilder initialMode={initialMode} />
       </section>
 
       <section className="invoice-safety" aria-labelledby="safety-heading">
@@ -112,4 +117,8 @@ export default function InvoicePage() {
       </footer>
     </main>
   );
+}
+
+export default function InvoicePage() {
+  return <InvoicePageContent />;
 }
