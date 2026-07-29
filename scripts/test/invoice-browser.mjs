@@ -11,7 +11,7 @@ const projectUrl = new URL("project/", targetUrl).href;
 const chromiumPath = process.env.CHROMIUM_PATH ?? "/snap/bin/chromium";
 const screenshotsDirectory = new URL("../../.screenshots/", import.meta.url);
 const customAddress = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
-const projectAddress = "bc1qm7nrve8325p20nqxk89dl6tyc9349cym9n0kh0";
+const projectAddress = "bc1qptn9jxrw5ltaus7gpze6kn96d0nlqfmj3u8c2q";
 
 function decodeQrDataUrl(dataUrl) {
   const encoded = dataUrl.split(",", 2)[1];

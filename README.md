@@ -132,7 +132,7 @@ The preflight tool and documents are free to use under the repository license.
 If they save you time, the public Bitcoin tip address is:
 
 ```text
-bc1qm7nrve8325p20nqxk89dl6tyc9349cym9n0kh0
+bc1qptn9jxrw5ltaus7gpze6kn96d0nlqfmj3u8c2q
 ```
 
 Tips do not book work. Agree a written scope before paying a service invoice.
