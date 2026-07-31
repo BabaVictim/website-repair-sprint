@@ -224,6 +224,11 @@ export default function Home() {
             performance findings. No login, form submission, security probing,
             or code changes.
           </p>
+          <p className="sample-report-link">
+            <Link className="text-link" href="/sample/">
+              Read a real sample report
+            </Link>
+          </p>
           <div className="hero-actions">
             <a className="button button-primary" href={preflightRequestUrl}>
               Request the $49 preflight
@@ -288,6 +293,7 @@ export default function Home() {
           <a href="#scope">Scope</a>
           <a href={preflightRequestUrl}>Preflight</a>
           <a href={requestUrl}>Repair sprint</a>
+          <Link href="/sample/">Sample report</Link>
           <Link href="/invoice/">Invoice tool</Link>
           <Link href="/third-party-notices.txt">Licenses</Link>
           <a href="https://github.com/BabaVictim/website-repair-sprint">

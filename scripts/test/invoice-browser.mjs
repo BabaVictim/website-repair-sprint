@@ -9,6 +9,7 @@ const targetUrl =
   "http://localhost:3000/invoice/";
 const siteUrl = new URL("../", targetUrl).href;
 const projectUrl = new URL("project/", targetUrl).href;
+const sampleUrl = new URL("sample/", siteUrl).href;
 const chromiumPath = process.env.CHROMIUM_PATH ?? "/snap/bin/chromium";
 const screenshotsDirectory = new URL("../../.screenshots/", import.meta.url);
 const customAddress = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa";
@@ -290,6 +291,13 @@ try {
     "the paid preflight request should be reachable from multiple primary locations",
   );
   assert.equal(
+    await page.$eval('a.text-link[href*="/sample"]', (element) =>
+      element.textContent?.trim(),
+    ),
+    "Read a real sample report",
+    "the paid offer should show a concrete sample deliverable",
+  );
+  assert.equal(
     await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
     true,
     "the service page should not overflow a narrow viewport",
@@ -312,6 +320,30 @@ try {
   await page.screenshot({
     fullPage: true,
     path: new URL("service-home-mobile.png", screenshotsDirectory).pathname,
+  });
+
+  await page.goto(sampleUrl, { waitUntil: "networkidle0" });
+  assert.match(
+    await page.$eval("h1", (element) => element.textContent ?? ""),
+    /Public-site preflight report/,
+  );
+  assert.equal(
+    await page.$$eval(".finding", (elements) => elements.length),
+    3,
+    "the sample should include three evidence-backed findings",
+  );
+  assert.equal(
+    await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+    true,
+    "the sample report should not overflow a narrow viewport",
+  );
+  assert.ok(
+    await page.$(`a[href="${preflightRequestUrl}"]`),
+    "the sample report should end with a paid request path",
+  );
+  await page.screenshot({
+    fullPage: true,
+    path: new URL("sample-report-mobile.png", screenshotsDirectory).pathname,
   });
 
   const origin = new URL(targetUrl).origin;
@@ -342,7 +374,7 @@ try {
   );
 
   console.log(
-    "Browser checks passed: exact URI/QR parity, validation/focus, project support, both paid offers, mobile layout, and no draft-data or third-party requests.",
+    "Browser checks passed: exact URI/QR parity, validation/focus, project support, both paid offers, sample report, mobile layout, and no draft-data or third-party requests.",
   );
 } finally {
   await browser.close();

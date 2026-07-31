@@ -434,6 +434,11 @@ h1 {
   max-width: 560px !important;
 }
 
+.sample-report-link {
+  font-size: 15px !important;
+  margin: -10px 0 24px !important;
+}
+
 .fit-check {
   background: var(--accent-soft);
   border: 1px solid #dfbea0;
@@ -537,6 +542,177 @@ h1 {
   color: #c4b9b0;
   font-size: 12px;
   margin-bottom: 0;
+}
+
+.report-page {
+  margin: 0 auto;
+  max-width: 980px;
+  padding: 72px 24px 88px;
+}
+
+.report-header {
+  border-bottom: 1px solid var(--strong-line);
+  padding-bottom: 46px;
+}
+
+.report-header h1 {
+  font-size: clamp(40px, 6vw, 64px);
+  max-width: 800px;
+}
+
+.report-header .lede {
+  max-width: 760px;
+}
+
+.report-meta {
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 38px 0 0;
+}
+
+.report-meta div {
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 120px minmax(0, 1fr);
+  padding: 14px 0;
+}
+
+.report-meta div:nth-child(odd) {
+  padding-right: 24px;
+}
+
+.report-meta div:nth-child(even) {
+  border-left: 1px solid var(--line);
+  padding-left: 24px;
+}
+
+.report-meta dt,
+.finding dt {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.report-meta dd,
+.finding dd {
+  margin: 0;
+}
+
+.report-meta dd {
+  font-size: 14px;
+}
+
+.report-section {
+  border-bottom: 1px solid var(--strong-line);
+  padding: 64px 0;
+}
+
+.report-section-heading {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: minmax(0, 0.8fr) minmax(300px, 1.2fr);
+  margin-bottom: 32px;
+}
+
+.report-section-heading h2,
+.report-cta h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin-bottom: 0;
+}
+
+.report-section-heading p,
+.report-cta p {
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+.finding-list {
+  border-top: 1px solid var(--strong-line);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.finding {
+  border-bottom: 1px solid var(--line);
+  padding: 30px 0;
+}
+
+.finding-heading {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 190px minmax(0, 1fr);
+  margin-bottom: 24px;
+}
+
+.finding-heading > p {
+  color: var(--accent-hover);
+  font-size: 13px;
+  font-weight: 750;
+  margin-bottom: 0;
+}
+
+.finding-resolved .finding-heading > p {
+  color: var(--green);
+}
+
+.finding h3 {
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 0;
+}
+
+.finding dl {
+  margin: 0 0 0 214px;
+}
+
+.finding dl div {
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 100px minmax(0, 1fr);
+  padding: 13px 0;
+}
+
+.finding dd {
+  font-size: 14px;
+}
+
+.report-pass-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.report-pass-list li {
+  border-top: 1px solid var(--line);
+  padding: 14px 0 14px 30px;
+  position: relative;
+}
+
+.report-pass-list li::before {
+  color: var(--green);
+  content: "✓";
+  font-weight: 800;
+  left: 2px;
+  position: absolute;
+}
+
+.report-cta {
+  align-items: center;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding-top: 64px;
+}
+
+.report-cta h2 {
+  margin-bottom: 12px;
 }
 
 .invoice-intro {
@@ -1068,9 +1244,28 @@ footer .footer-note {
 
   .section-heading,
   .price-section,
-  .support-section {
+  .support-section,
+  .report-meta,
+  .report-section-heading,
+  .report-cta {
     gap: 32px;
     grid-template-columns: 1fr;
+  }
+
+  .report-meta div:nth-child(odd),
+  .report-meta div:nth-child(even) {
+    border-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .finding-heading {
+    gap: 8px;
+    grid-template-columns: 1fr;
+  }
+
+  .finding dl {
+    margin-left: 0;
   }
 
   .scope-grid {
@@ -1117,6 +1312,7 @@ footer .footer-note {
   .hero,
   .content-section,
   .support-section,
+  .report-page,
   .invoice-intro,
   .builder-section,
   .invoice-safety {
@@ -1153,6 +1349,7 @@ footer .footer-note {
 
   .content-section,
   .support-section,
+  .report-section,
   .invoice-safety {
     padding-bottom: 64px;
     padding-top: 64px;
@@ -1170,6 +1367,16 @@ footer .footer-note {
   .invoice-intro {
     padding-bottom: 34px;
     padding-top: 52px;
+  }
+
+  .report-page {
+    padding-top: 48px;
+  }
+
+  .report-meta div,
+  .finding dl div {
+    gap: 6px;
+    grid-template-columns: 1fr;
   }
 
   .builder-section {

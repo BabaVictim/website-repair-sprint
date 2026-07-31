@@ -16,6 +16,9 @@ the repair sprint is $300. Scope, acceptance criteria, exchange-rate source,
 invoice amount, and any authorized access are agreed in writing before work
 starts.
 
+See a [real sample preflight report](https://babavictim.github.io/website-repair-sprint/sample/)
+for the evidence, priority, and next-action format used in delivery.
+
 ## What is here
 
 - The public service site in [`app/`](app/)

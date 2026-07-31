@@ -4,18 +4,18 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "48-hour Website Repair Sprint",
+    default: "Website Preflight & 48-hour Repair Sprint",
     template: "%s · Website Repair Sprint",
   },
   description:
-    "A fixed-scope engineering sprint for broken mobile layouts, forms, accessibility, metadata, and performance regressions.",
+    "A $49 public-site preflight report or $300 fixed-scope repair sprint, paid in Bitcoin with written scope before payment.",
   alternates: {
     canonical: "https://babavictim.github.io/website-repair-sprint/",
   },
   openGraph: {
-    title: "48-hour Website Repair Sprint",
+    title: "Website Preflight & 48-hour Repair Sprint",
     description:
-      "One focused pass on an existing website. Tested patch, before/after report, and one revision.",
+      "Start with a $49 public-site report or book a $300 repair sprint with a tested patch and delivery evidence.",
     type: "website",
     url: "https://babavictim.github.io/website-repair-sprint/",
   },
