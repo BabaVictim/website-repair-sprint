@@ -1,0 +1,52 @@
+name: Ask about a one-page website
+description: Discuss the $150 PageSprint offer and a public project outline.
+title: "[PageSprint inquiry] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is a public inquiry, not a confirmed booking or a payment request.
+        Do not include passwords, API keys, personal contact details, private files, or client data.
+        PageSprint is $150 USD for one static page with up to five sections, one revision, and source handoff. You provide the text and usable images. The first-draft deadline is agreed after the complete brief and scope are accepted. Hosting, domains, and backend features are separate.
+  - type: input
+    id: project
+    attributes:
+      label: Public project name
+      description: Use a general description if the project is not public.
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: What should the page help visitors do?
+      placeholder: Understand my services and follow an existing booking link.
+    validations:
+      required: true
+  - type: input
+    id: audience
+    attributes:
+      label: Intended audience
+  - type: textarea
+    id: sections
+    attributes:
+      label: Proposed page sections
+      description: Up to five sections. A short non-sensitive outline is enough here.
+  - type: dropdown
+    id: content-readiness
+    attributes:
+      label: Is your content ready?
+      options:
+        - Text and images are ready
+        - Some content is ready
+        - I need to prepare it
+    validations:
+      required: true
+  - type: checkboxes
+    id: understanding
+    attributes:
+      label: Before submitting
+      options:
+        - label: I understand that this request is public and contains no credentials or private information.
+          required: true
+        - label: I understand that scope, delivery time, and payment terms must be agreed before work starts.
+          required: true
