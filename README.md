@@ -8,6 +8,13 @@ checklists used to deliver the work.
 
 Live site: <https://babavictim.github.io/website-repair-sprint/>
 
+PageSprint: <https://babavictim.github.io/website-repair-sprint/pagesprint/>
+
+The PageSprint offer is a $150 USD custom one-page website with up to five
+sections, one revision, and source handoff. Its two demonstration pages are
+fictional concepts. Visitors can open the public PageSprint inquiry form to
+agree scope and payment terms before work starts.
+
 Bitcoin Invoice Builder:
 <https://babavictim.github.io/website-repair-sprint/invoice/>
 
